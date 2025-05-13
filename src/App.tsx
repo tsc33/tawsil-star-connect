@@ -9,6 +9,9 @@ import Dashboard from "./pages/Dashboard";
 import Social from "./pages/Social";
 import CategoryEntries from "./pages/CategoryEntries"; 
 import NotFound from "./pages/NotFound";
+import Messages from "./pages/Messages";
+import Profile from "./pages/Profile";
+import Tracking from "./pages/Tracking";
 
 const queryClient = new QueryClient();
 
@@ -24,10 +27,10 @@ const App = () => (
             <Route path="social" element={<Social />} />
             <Route path="merchants" element={<CategoryEntries />} />
             <Route path="categories/:category" element={<CategoryEntries />} />
-            <Route path="tracking" element={<div className="py-12 text-center">Page de suivi (à implémenter)</div>} />
-            <Route path="deliveries" element={<div className="py-12 text-center">Page des livraisons (à implémenter)</div>} />
-            <Route path="messages" element={<div className="py-12 text-center">Page des messages (à implémenter)</div>} />
-            <Route path="profile" element={<div className="py-12 text-center">Page de profil (à implémenter)</div>} />
+            <Route path="tracking" element={<Tracking />} />
+            <Route path="deliveries" element={<CategoryEntries category="drivers" />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -15,7 +15,6 @@ const AppLayout = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // Déterminer le titre en fonction du chemin actuel
   const getTitle = () => {
     switch (location.pathname) {
       case "/":
@@ -42,11 +41,15 @@ const AppLayout = () => {
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       
       <div className={`flex-1 flex flex-col overflow-hidden ${isMobile ? "" : "md:ml-64"}`}>
-        <Header title={getTitle()} toggleSidebar={toggleSidebar} />
+        <Header 
+          title={getTitle()} 
+          toggleSidebar={toggleSidebar} 
+          logoSrc="/lovable-uploads/68f71fba-5c9d-4866-8ab2-bb292774e6f9.png"
+        />
         
         <main 
           className="flex-1 overflow-y-auto p-4 md:p-6"
-          onClick={() => isSidebarOpen && setIsSidebarOpen(false)}
+          onClick={() => isMobile && setIsSidebarOpen(false)}
         >
           <Outlet />
         </main>
