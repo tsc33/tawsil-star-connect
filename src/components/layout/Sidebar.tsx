@@ -1,19 +1,21 @@
 
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Home,
   Package,
   Users,
   MessageSquare,
   User,
-  BarChart2,
+  Store,
   MapPin,
   Menu,
   X,
+  Truck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 type SidebarProps = {
   isSidebarOpen: boolean;
@@ -22,10 +24,11 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
   const isMobile = useIsMobile();
+  const location = useLocation();
   
   const sidebarItems = [
     {
-      name: "Tableau de bord",
+      name: "Accueil",
       icon: <Home className="h-5 w-5" />,
       path: "/",
     },
@@ -36,12 +39,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
     },
     {
       name: "Social",
-      icon: <BarChart2 className="h-5 w-5" />,
+      icon: <MessageSquare className="h-5 w-5" />,
       path: "/social",
     },
     {
       name: "Commerçants",
-      icon: <Users className="h-5 w-5" />,
+      icon: <Store className="h-5 w-5" />,
       path: "/merchants",
     },
     {
@@ -50,8 +53,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
       path: "/deliveries",
     },
     {
-      name: "Messages",
-      icon: <MessageSquare className="h-5 w-5" />,
+      name: "Livreurs",
+      icon: <Truck className="h-5 w-5" />,
       path: "/messages",
     },
     {
@@ -65,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
     return (
       <Button
         onClick={toggleSidebar}
-        className="fixed z-50 top-4 left-4 p-2 bg-tawsil-blue text-white rounded-full shadow-lg"
+        className="fixed z-50 top-4 left-4 p-2 bg-tawsil-blue text-white rounded-full shadow-lg md:hidden"
       >
         <Menu className="h-5 w-5" />
       </Button>
@@ -80,7 +83,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
     >
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-tawsil-yellow rounded-md flex items-center justify-center text-tawsil-blue font-bold text-xl">
+          <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center text-tawsil-blue font-bold text-xl">
             T
           </div>
           <h1 className="font-bold text-xl tracking-tight">Tawsil Star</h1>
@@ -93,18 +96,26 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
       </div>
 
       <div className="mt-6 flex flex-col flex-1 overflow-y-auto">
-        <nav className="space-y-2 px-3">
-          {sidebarItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className="flex items-center gap-3 px-4 py-2.5 rounded-md hover:bg-tawsil-blue/80 transition-colors duration-200"
-              onClick={isMobile ? toggleSidebar : undefined}
-            >
-              {item.icon}
-              <span className="font-medium">{item.name}</span>
-            </Link>
-          ))}
+        <nav className="space-y-1 px-3">
+          {sidebarItems.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "flex items-center gap-3 px-4 py-2.5 rounded-md transition-colors duration-200",
+                  isActive 
+                    ? "bg-white/20 font-medium" 
+                    : "hover:bg-tawsil-blue/80"
+                )}
+                onClick={isMobile ? toggleSidebar : undefined}
+              >
+                {item.icon}
+                <span className="font-medium">{item.name}</span>
+              </Link>
+            );
+          })}
         </nav>
       </div>
 

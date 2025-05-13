@@ -26,7 +26,7 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				'tawsil': {
-					'blue': '#1E2A45',
+					'blue': '#1455A8', // Updated to royal blue
 					'yellow': '#FFD700',
 					'light': '#F8F9FA',
 				},

@@ -4,10 +4,12 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useLocation } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const AppLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -39,8 +41,8 @@ const AppLayout = () => {
     <div className="h-screen flex overflow-hidden bg-gray-50">
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       
-      <div className="flex-1 flex flex-col overflow-hidden md:ml-64">
-        <Header title={getTitle()} />
+      <div className={`flex-1 flex flex-col overflow-hidden ${isMobile ? "" : "md:ml-64"}`}>
+        <Header title={getTitle()} toggleSidebar={toggleSidebar} />
         
         <main 
           className="flex-1 overflow-y-auto p-4 md:p-6"

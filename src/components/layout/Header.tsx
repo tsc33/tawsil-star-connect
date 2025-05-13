@@ -1,33 +1,44 @@
 
 import React from "react";
-import { Bell, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Bell, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type HeaderProps = {
   title: string;
+  toggleSidebar: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ title }) => {
+const Header = ({ title, toggleSidebar }: HeaderProps) => {
+  const isMobile = useIsMobile();
+
   return (
-    <header className="bg-white shadow-sm py-4 px-6 flex items-center justify-between">
-      <h1 className="text-xl md:text-2xl font-bold text-tawsil-blue">{title}</h1>
-      <div className="flex items-center gap-4">
-        <div className="relative hidden md:flex items-center">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input
-            placeholder="Rechercher..."
-            className="pl-10 bg-gray-50 border-gray-200 w-64"
-          />
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+      <div className="px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center">
+          {isMobile && (
+            <Button variant="ghost" size="icon" onClick={toggleSidebar} className="mr-2">
+              <Menu className="h-5 w-5" />
+            </Button>
+          )}
+          
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-tawsil-blue rounded-md flex items-center justify-center text-white font-bold text-xl">
+              T
+            </div>
+            <h1 className="font-semibold text-lg md:text-xl">{title}</h1>
+          </div>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="relative text-gray-600"
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-        </Button>
+        
+        <div className="flex items-center space-x-2">
+          <Button variant="ghost" size="icon" className="relative">
+            <Bell className="h-5 w-5" />
+            <span className="absolute top-1 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+          </Button>
+          <Button variant="ghost" size="icon">
+            <Search className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
     </header>
   );

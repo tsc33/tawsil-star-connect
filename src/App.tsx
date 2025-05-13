@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Social from "./pages/Social";
-import Merchants from "./pages/Merchants";
+import CategoryEntries from "./pages/CategoryEntries"; 
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,8 +22,8 @@ const App = () => (
           <Route path="/" element={<AppLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="social" element={<Social />} />
-            <Route path="merchants" element={<Merchants />} />
-            {/* Routes à implémenter plus tard */}
+            <Route path="merchants" element={<CategoryEntries />} />
+            <Route path="categories/:category" element={<CategoryEntries />} />
             <Route path="tracking" element={<div className="py-12 text-center">Page de suivi (à implémenter)</div>} />
             <Route path="deliveries" element={<div className="py-12 text-center">Page des livraisons (à implémenter)</div>} />
             <Route path="messages" element={<div className="py-12 text-center">Page des messages (à implémenter)</div>} />
