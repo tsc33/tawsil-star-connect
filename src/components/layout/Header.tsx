@@ -7,9 +7,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 type HeaderProps = {
   title: string;
   toggleSidebar: () => void;
+  logoSrc?: string;
 };
 
-const Header = ({ title, toggleSidebar }: HeaderProps) => {
+const Header = ({ title, toggleSidebar, logoSrc }: HeaderProps) => {
   const isMobile = useIsMobile();
 
   return (
@@ -23,9 +24,13 @@ const Header = ({ title, toggleSidebar }: HeaderProps) => {
           )}
           
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-tawsil-blue rounded-md flex items-center justify-center text-white font-bold text-xl">
-              T
-            </div>
+            {logoSrc ? (
+              <img src={logoSrc} alt="Tawsil Star Logo" className="w-8 h-8 object-contain" />
+            ) : (
+              <div className="w-8 h-8 bg-tawsil-blue rounded-md flex items-center justify-center text-white font-bold text-xl">
+                T
+              </div>
+            )}
             <h1 className="font-semibold text-lg md:text-xl">{title}</h1>
           </div>
         </div>

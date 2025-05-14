@@ -83,9 +83,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
     >
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center text-tawsil-blue font-bold text-xl">
-            T
-          </div>
+          <img 
+            src="/lovable-uploads/9993daeb-ab90-4275-bb22-bcd608d1d0b9.png" 
+            alt="Tawsil Star" 
+            className="w-8 h-8 object-contain"
+          />
           <h1 className="font-bold text-xl tracking-tight">Tawsil Star</h1>
         </div>
         {isMobile && (

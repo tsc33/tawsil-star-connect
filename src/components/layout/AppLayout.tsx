@@ -44,7 +44,7 @@ const AppLayout = () => {
         <Header 
           title={getTitle()} 
           toggleSidebar={toggleSidebar} 
-          logoSrc="/lovable-uploads/68f71fba-5c9d-4866-8ab2-bb292774e6f9.png"
+          logoSrc="/lovable-uploads/9993daeb-ab90-4275-bb22-bcd608d1d0b9.png"
         />
         
         <main 

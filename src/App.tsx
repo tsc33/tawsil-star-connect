@@ -28,7 +28,7 @@ const App = () => (
             <Route path="merchants" element={<CategoryEntries />} />
             <Route path="categories/:category" element={<CategoryEntries />} />
             <Route path="tracking" element={<Tracking />} />
-            <Route path="deliveries" element={<CategoryEntries category="drivers" />} />
+            <Route path="deliveries" element={<CategoryEntries />} />
             <Route path="messages" element={<Messages />} />
             <Route path="profile" element={<Profile />} />
           </Route>
