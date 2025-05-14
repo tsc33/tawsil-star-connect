@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tawsil Star Connect</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4ff;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background: #1877f2;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .form-section, .list-section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    label, input, select, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      background: #1877f2;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .entry {
+      background: #e7f0ff;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .entry-buttons {
+      margin-top: 5px;
+    }
+    .entry-buttons button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tawsil Star Connect</h1>
+    <p>Plateforme de gestion des partenaires</p>
+  </header>  <div class="form-section">
+    <h2>Ajouter un partenaire</h2>
+    <form id="partnerForm">
+      <label>Nom</label>
+      <input type="text" id="name" required /><label>Téléphone</label>
+  <input type="text" id="phone" required />
+
+  <label>Facebook (URL)</label>
+  <input type="url" id="facebook" placeholder="https://facebook.com/..." />
+
+  <label>Type d'activité</label>
+  <select id="type">
+    <option value="restaurant">Restaurant</option>
+    <option value="fast-food">Fast Food</option>
+    <option value="à domicile">À Domicile</option>
+    <option value="scooter">Livreur (Scooter)</option>
+    <option value="vtc">VTC</option>
+  </select>
+
+  <label>Wilaya</label>
+  <select id="wilaya">
+    <option value="Alger">Alger</option>
+    <option value="Bouira">Bouira</option>
+    <option value="Sétif">Sétif</option>
+    <option value="Oran">Oran</option>
+    <option value="Constantine">Constantine</option>
+    <!-- Ajouter d'autres wilayas ici -->
+  </select>
+
+  <button type="submit">Ajouter</button>
+</form>
+
+  </div>  <div class="list-section">
+    <h2>Liste des partenaires</h2>
+    <div id="partnerList"></div>
+  </div>  <script>
+    const form = document.getElementById("partnerForm");
+    const list = document.getElementById("partnerList");
+
+    let partners = JSON.parse(localStorage.getItem("partners")) || [];
+
+    const renderList = () => {
+      list.innerHTML = "";
+      partners.forEach((p, index) => {
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.innerHTML = `
+          <strong>${p.name}</strong> - ${p.phone} - <em>${p.type}</em> - ${p.wilaya}<br />
+          <a href="${p.facebook}" target="_blank">Page Facebook</a>
+          <div class="entry-buttons">
+            <button onclick="deleteEntry(${index})">Supprimer</button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    };
+
+    const deleteEntry = (index) => {
+      partners.splice(index, 1);
+      localStorage.setItem("partners", JSON.stringify(partners));
+      renderList();
+    };
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const newPartner = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        facebook: document.getElementById("facebook").value,
+        type: document.getElementById("type").value,
+        wilaya: document.getElementById("wilaya").value,
+      };
+      partners.push(newPartner);
+      localStorage.setItem("partners", JSON.stringify(partners));
+      form.reset();
+      renderList();
+    };
+
+    renderList();
+  </script></body>
+</html>
